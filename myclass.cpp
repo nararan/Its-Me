@@ -18,8 +18,17 @@ MyClass::MyClass(QWidget *parent)
 	vf->resize(dw->geometry().width(), dw->geometry().height());
 	ui.verticalLayoutWidget->resize(dw->geometry().width(), dw->geometry().height());
 	cic = new QCameraImageCapture(cam);
-	connect(cic, SIGNAL(imageCaptured(int, QImage)), this, SLOT(processImage(int, QImage)));
-	cam->setCaptureMode(QCamera::CaptureStillImage);
+	recorder = new QMediaRecorder(cam);
+	connect(recorder, SIGNAL(stateChanged(QMediaRecorder::State)), this, SLOT(processImage(QMediaRecorder::State *)));
+	cam->setCaptureMode(QCamera::CaptureVideo);
+	
+
+	auto&& settings = recorder->videoSettings();//6
+	settings.setResolution(1280, 720);
+	settings.setQuality(QMultimedia::VeryHighQuality);
+	settings.setFrameRate(30.0);
+	recorder->setVideoSettings(settings);
+
 	cam->start();
 
 }
@@ -31,31 +40,33 @@ MyClass::~MyClass()
 
 
 void MyClass::newDig() {
-	cic->capture();
+	
+	QString name = "aaa.mp4";
+	recorder->setOutputLocation(QUrl::fromLocalFile(name));
 	//shotDig mDig = new shotDig();
-
-
+	if (ui.strBtn->text() == "start")
+	{
+		recorder->record();
+		ui.strBtn->setText("stop");
+	}
+	else
+	{
+		recorder->stop();
+		ui.strBtn->setText("start");
+		recorder->outputLocation().toLocalFile();
+	}
 }
 
 
-void MyClass::processImage(int i, QImage img)
+void MyClass::processImage(QMediaRecorder::State *state)
 {
-	//QString name = QFileDialog::getSaveFileName();
-	//img.save(name);
-	cam->stop();
 
-	QMediaRecorder * recorder = new QMediaRecorder(cam);
-
-	cam->setCaptureMode(QCamera::CaptureVideo);
-	cam->start();
-
-	//on shutter button pressed
-	recorder->record();
-	recorder->setOutputLocation;
-
+		
+	
+		
 	// sometime later, or on another press
-	recorder->stop();
-	shotDig mDig = new shotDig();
+	
+	//shotDig mDig = new shotDig();
 
 }
 

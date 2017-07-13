@@ -25,7 +25,7 @@ public:
 	MyClass(QWidget *parent = 0);
 	~MyClass();
 	QImage Mat2QImage(cv::Mat const& src);
-
+	QMediaRecorder * recorder;
 	QCameraViewfinder * vf;
 	QCameraImageCapture * cic;
 	QCamera * cam;
@@ -34,7 +34,7 @@ private:
 	Ui::MyClassClass ui;
 
 	public slots:
-	void processImage(int i, QImage img);
+	void processImage(QMediaRecorder::State *state);
 	void newDig();
 	
 };

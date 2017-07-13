@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MyClass_t {
     QByteArrayData data[6];
-    char stringdata0[35];
+    char stringdata0[58];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,13 @@ static const qt_meta_stringdata_MyClass_t qt_meta_stringdata_MyClass = {
 QT_MOC_LITERAL(0, 0, 7), // "MyClass"
 QT_MOC_LITERAL(1, 8, 12), // "processImage"
 QT_MOC_LITERAL(2, 21, 0), // ""
-QT_MOC_LITERAL(3, 22, 1), // "i"
-QT_MOC_LITERAL(4, 24, 3), // "img"
-QT_MOC_LITERAL(5, 28, 6) // "newDig"
+QT_MOC_LITERAL(3, 22, 22), // "QMediaRecorder::State*"
+QT_MOC_LITERAL(4, 45, 5), // "state"
+QT_MOC_LITERAL(5, 51, 6) // "newDig"
 
     },
-    "MyClass\0processImage\0\0i\0img\0newDig"
+    "MyClass\0processImage\0\0QMediaRecorder::State*\0"
+    "state\0newDig"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,11 +56,11 @@ static const uint qt_meta_data_MyClass[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    2,   24,    2, 0x0a /* Public */,
-       5,    0,   29,    2, 0x0a /* Public */,
+       1,    1,   24,    2, 0x0a /* Public */,
+       5,    0,   27,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::QImage,    3,    4,
+    QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
 
        0        // eod
@@ -71,7 +72,7 @@ void MyClass::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         MyClass *_t = static_cast<MyClass *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->processImage((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QImage(*)>(_a[2]))); break;
+        case 0: _t->processImage((*reinterpret_cast< QMediaRecorder::State*(*)>(_a[1]))); break;
         case 1: _t->newDig(); break;
         default: ;
         }
