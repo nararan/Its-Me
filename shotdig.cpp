@@ -10,6 +10,7 @@ shotDig::shotDig(QWidget * parent) : QWidget(parent) {
 
 	ui.imgLbl->setPixmap(*buf);
 	ui.imgLbl->setGeometry(0, 0, dw->geometry().width(), dw->geometry().height());
+	this->setGeometry(0, 0, dw->geometry().width(), dw->geometry().height());
 	this->show();
 }
 
@@ -17,7 +18,7 @@ shotDig::~shotDig() {
 
 }
 void  shotDig::saveImg() {
-	QString name = QFileDialog::getSaveFileName();
+	QString name = QFileDialog::getSaveFileName(this,"save image","untitle.png","Images(*.png *.xpm *.jpg)");
 	img.save(name);
 }
 void shotDig::editImg() {
