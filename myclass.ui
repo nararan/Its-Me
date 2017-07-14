@@ -27,19 +27,6 @@
      <string>start</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="editBtn">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>20</y>
-      <width>79</width>
-      <height>46</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>edit</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -53,7 +40,6 @@
    </widget>
    <zorder>verticalLayoutWidget</zorder>
    <zorder>strBtn</zorder>
-   <zorder>editBtn</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -29,7 +29,6 @@ class Ui_MyClassClass
 public:
     QWidget *centralWidget;
     QPushButton *strBtn;
-    QPushButton *editBtn;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
     QMenuBar *menuBar;
@@ -46,9 +45,6 @@ public:
         strBtn = new QPushButton(centralWidget);
         strBtn->setObjectName(QStringLiteral("strBtn"));
         strBtn->setGeometry(QRect(20, 20, 79, 46));
-        editBtn = new QPushButton(centralWidget);
-        editBtn->setObjectName(QStringLiteral("editBtn"));
-        editBtn->setGeometry(QRect(110, 20, 79, 46));
         verticalLayoutWidget = new QWidget(centralWidget);
         verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
         verticalLayoutWidget->setGeometry(QRect(10, 10, 1091, 681));
@@ -60,7 +56,6 @@ public:
         MyClassClass->setCentralWidget(centralWidget);
         verticalLayoutWidget->raise();
         strBtn->raise();
-        editBtn->raise();
         menuBar = new QMenuBar(MyClassClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1115, 26));
@@ -82,7 +77,6 @@ public:
     {
         MyClassClass->setWindowTitle(QApplication::translate("MyClassClass", "MyClass", 0));
         strBtn->setText(QApplication::translate("MyClassClass", "start", 0));
-        editBtn->setText(QApplication::translate("MyClassClass", "edit", 0));
     } // retranslateUi
 
 };

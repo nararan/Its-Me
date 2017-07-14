@@ -55,6 +55,8 @@ void MyClass::newDig() {
 		ui.strBtn->setText("start");
 		recorder->outputLocation().toLocalFile();
 	}
+
+	shotDig mDig = new shotDig();
 }
 
 
