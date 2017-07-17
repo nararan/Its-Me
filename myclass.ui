@@ -19,8 +19,8 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>79</width>
-      <height>46</height>
+      <width>70</width>
+      <height>50</height>
      </rect>
     </property>
     <property name="text">
@@ -38,8 +38,36 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout"/>
    </widget>
+   <widget class="QPushButton" name="editBtn">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>20</y>
+      <width>70</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>edit</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>20</y>
+      <width>70</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>restart</string>
+    </property>
+   </widget>
    <zorder>verticalLayoutWidget</zorder>
    <zorder>strBtn</zorder>
+   <zorder>editBtn</zorder>
+   <zorder>pushButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -82,8 +110,42 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>editBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MyClassClass</receiver>
+   <slot>newEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>84</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>186</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MyClassClass</receiver>
+   <slot>reStart()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>184</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>365</x>
+     <y>232</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newDig()</slot>
+  <slot>newEdit()</slot>
+  <slot>reStart()</slot>
  </slots>
 </ui>

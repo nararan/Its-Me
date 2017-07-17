@@ -9,6 +9,8 @@ public:
 	editDig(QWidget * parent = Q_NULLPTR);
 	~editDig();
 	QDesktopWidget *dw;
+	QImage img;
+
 private:
 	Ui::editDig ui;
 };

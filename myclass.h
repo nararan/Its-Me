@@ -36,7 +36,8 @@ private:
 	public slots:
 	void processImage(QMediaRecorder::State *state);
 	void newDig();
-	
+	void newEdit();
+	void reStart();
 };
 
 #endif // MYCLASS_H

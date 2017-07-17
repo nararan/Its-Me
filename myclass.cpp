@@ -1,5 +1,5 @@
 #include "myclass.h"
-#include "shotdig.hpp"
+#include "editdig.hpp"
 
 MyClass::MyClass(QWidget *parent)
 	: QMainWindow(parent)
@@ -21,7 +21,7 @@ MyClass::MyClass(QWidget *parent)
 	recorder = new QMediaRecorder(cam);
 	connect(recorder, SIGNAL(stateChanged(QMediaRecorder::State)), this, SLOT(processImage(QMediaRecorder::State *)));
 	cam->setCaptureMode(QCamera::CaptureVideo);
-	
+
 
 	auto&& settings = recorder->videoSettings();//6
 	settings.setResolution(1280, 720);
@@ -40,34 +40,50 @@ MyClass::~MyClass()
 
 
 void MyClass::newDig() {
-	
+
 	QString name = "aaa.mp4";
 	recorder->setOutputLocation(QUrl::fromLocalFile(name));
 	//shotDig mDig = new shotDig();
 	if (ui.strBtn->text() == "start")
 	{
 		recorder->record();
-		ui.strBtn->setText("stop");
+		ui.strBtn->setText("save");
+		cam->stop();
+
+		///////////////////////////////////////////¿©±â¿¡  opencv Ä· 
+
 	}
 	else
 	{
-		recorder->stop();
-		ui.strBtn->setText("start");
-		recorder->outputLocation().toLocalFile();
+		QImage img;
+		img.load("Blue.jpg");
+		QPixmap *buf = new QPixmap();
+		*buf = QPixmap::fromImage(img);
+
+		QString name = QFileDialog::getSaveFileName(this, "save image", "untitle.png", "Images(*.png *.xpm *.jpg)");
+		img.save(name);
+	
 	}
 
-	shotDig mDig = new shotDig();
 }
+void MyClass::newEdit() {
+	editDig edit = new editDig();
+
+}
+void MyClass::reStart() {
+	cam->start();
+	ui.strBtn->setText("start");
 
 
+}
 void MyClass::processImage(QMediaRecorder::State *state)
 {
 
-		
-	
-		
+
+
+
 	// sometime later, or on another press
-	
+
 	//shotDig mDig = new shotDig();
 
 }
