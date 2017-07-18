@@ -17,6 +17,8 @@
 #include <QMediaRecorder>
 
 
+
+
 class MyClass : public QMainWindow
 {
 	Q_OBJECT

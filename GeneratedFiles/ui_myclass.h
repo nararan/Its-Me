@@ -82,6 +82,8 @@ public:
         QObject::connect(editBtn, SIGNAL(clicked()), MyClassClass, SLOT(newEdit()));
         QObject::connect(pushButton, SIGNAL(clicked()), MyClassClass, SLOT(reStart()));
 
+
+
         QMetaObject::connectSlotsByName(MyClassClass);
     } // setupUi
 

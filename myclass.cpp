@@ -64,6 +64,7 @@ void MyClass::newDig() {
 		img.save(name);
 	
 	}
+	 
 
 }
 void MyClass::newEdit() {
