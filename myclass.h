@@ -15,7 +15,7 @@
 #include <QImage>
 #include <qvideoprobe.h>
 #include <QMediaRecorder>
-
+#include <time.h> 
 
 
 
@@ -27,9 +27,8 @@ public:
 	MyClass(QWidget *parent = 0);
 	~MyClass();
 	QImage Mat2QImage(cv::Mat const& src);
-	QMediaRecorder * recorder;
 	QCameraViewfinder * vf;
-	QCameraImageCapture * cic;
+
 	QCamera * cam;
 
 private:

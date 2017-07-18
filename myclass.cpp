@@ -1,6 +1,9 @@
 #include "myclass.h"
 #include "editdig.hpp"
 
+using namespace cv;
+using namespace std;
+
 MyClass::MyClass(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -17,18 +20,7 @@ MyClass::MyClass(QWidget *parent)
 	cam->setViewfinder(vf);
 	vf->resize(dw->geometry().width(), dw->geometry().height());
 	ui.verticalLayoutWidget->resize(dw->geometry().width(), dw->geometry().height());
-	cic = new QCameraImageCapture(cam);
-	recorder = new QMediaRecorder(cam);
-	connect(recorder, SIGNAL(stateChanged(QMediaRecorder::State)), this, SLOT(processImage(QMediaRecorder::State *)));
 	cam->setCaptureMode(QCamera::CaptureVideo);
-
-
-	auto&& settings = recorder->videoSettings();//6
-	settings.setResolution(1280, 720);
-	settings.setQuality(QMultimedia::VeryHighQuality);
-	settings.setFrameRate(30.0);
-	recorder->setVideoSettings(settings);
-
 	cam->start();
 
 }
@@ -41,14 +33,55 @@ MyClass::~MyClass()
 
 void MyClass::newDig() {
 
-	QString name = "aaa.mp4";
-	recorder->setOutputLocation(QUrl::fromLocalFile(name));
-	//shotDig mDig = new shotDig();
+
 	if (ui.strBtn->text() == "start")
 	{
-		recorder->record();
 		ui.strBtn->setText("save");
 		cam->stop();
+		VideoCapture capture(0);
+		VideoWriter outputVideo;
+		Mat frame;
+		capture >> frame;
+
+		Size *s = new Size((int)frame.cols, (int)frame.rows);
+		
+		outputVideo.open("C://Users//HAN//Documents//Its-Me//photo//video.avi", -1,
+			15, *s, true);
+
+		if (!outputVideo.isOpened())
+		{
+			cout << "동영상을 저장하기 위한 초기화 작업 중 에러 발생" << endl;
+			return ;
+		}
+
+		if (!capture.isOpened())
+		{
+			cout << "웹캠을 열수 없습니다." << endl;
+			return ;
+		}
+
+		//캡처 영상을 640x480으로 지정  
+		capture.set(CAP_PROP_FRAME_WIDTH, 640);
+		capture.set(CAP_PROP_FRAME_HEIGHT, 480);
+
+		namedWindow("input", 1);
+	
+		while(1)
+		{
+			//웹캡으로부터 한 프레임을 읽어옴  
+			
+		
+			capture >> frame;
+			outputVideo << frame;
+		
+			//화면에 영상을 보여줌
+			imshow("input", frame);
+
+			//ESC키 누르면 종료
+			if (waitKey(1) == 27) break;
+
+		}
+
 
 		///////////////////////////////////////////여기에  opencv 캠 
 
