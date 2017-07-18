@@ -23,50 +23,57 @@ QT_BEGIN_NAMESPACE
 class Ui_shotDig
 {
 public:
-    QLabel *imgLbl;
-    QPushButton *saveBtn;
-    QPushButton *edit;
-    QPushButton *canBtn;
+	QLabel *imgLbl;
+	QPushButton *saveBtn;
+	QPushButton *editBtn;
+	QPushButton *canBtn;
+	QIcon *icon;
 
-    void setupUi(QWidget *shotDig)
-    {
-        if (shotDig->objectName().isEmpty())
-            shotDig->setObjectName(QStringLiteral("shotDig"));
-        shotDig->resize(400, 300);
-        imgLbl = new QLabel(shotDig);
-        imgLbl->setObjectName(QStringLiteral("imgLbl"));
-        imgLbl->setGeometry(QRect(150, 170, 64, 15));
-        saveBtn = new QPushButton(shotDig);
-        saveBtn->setObjectName(QStringLiteral("saveBtn"));
-        saveBtn->setGeometry(QRect(10, 10, 80, 30));
-        edit = new QPushButton(shotDig);
-        edit->setObjectName(QStringLiteral("edit"));
-        edit->setGeometry(QRect(100, 10, 80, 30));
-        canBtn = new QPushButton(shotDig);
-        canBtn->setObjectName(QStringLiteral("canBtn"));
-        canBtn->setGeometry(QRect(190, 10, 80, 30));
 
-        retranslateUi(shotDig);
-        QObject::connect(saveBtn, SIGNAL(clicked()), shotDig, SLOT(saveImg()));
-        QObject::connect(edit, SIGNAL(clicked()), shotDig, SLOT(editImg()));
-        QObject::connect(canBtn, SIGNAL(clicked()), shotDig, SLOT(close()));
+	void setupUi(QWidget *shotDig)
+	{
+		if (shotDig->objectName().isEmpty())
+			shotDig->setObjectName(QStringLiteral("shotDig"));
+		shotDig->resize(400, 300);
+		imgLbl = new QLabel(shotDig);
+		imgLbl->setObjectName(QStringLiteral("imgLbl"));
+		imgLbl->setGeometry(QRect(150, 170, 64, 15));
 
-        QMetaObject::connectSlotsByName(shotDig);
-    } // setupUi
+		icon = new QIcon("btn.PNG");
 
-    void retranslateUi(QWidget *shotDig)
-    {
-        shotDig->setWindowTitle(QApplication::translate("shotDig", "shotDig", 0));
-        imgLbl->setText(QString());
-        saveBtn->setText(QApplication::translate("shotDig", "save", 0));
-        edit->setText(QApplication::translate("shotDig", "edit", 0));
-        canBtn->setText(QApplication::translate("shotDig", "cancel", 0));
-    } // retranslateUi
+		saveBtn = new QPushButton(*icon, "", shotDig);
+		saveBtn->setIconSize(QSize(80, 30));
+		saveBtn->setGeometry(QRect(10, 10, 80, 30));
+
+		editBtn = new QPushButton(shotDig);
+		editBtn->setObjectName(QStringLiteral("editBtn"));
+		editBtn->setGeometry(QRect(100, 10, 80, 30));
+
+		canBtn = new QPushButton(shotDig);
+		canBtn->setObjectName(QStringLiteral("canBtn"));
+		canBtn->setGeometry(QRect(190, 10, 80, 30));
+
+		retranslateUi(shotDig);
+		QObject::connect(saveBtn, SIGNAL(clicked()), shotDig, SLOT(saveImg()));
+		QObject::connect(editBtn, SIGNAL(clicked()), shotDig, SLOT(editImg()));
+		QObject::connect(canBtn, SIGNAL(clicked()), shotDig, SLOT(close()));
+
+		QMetaObject::connectSlotsByName(shotDig);
+	} // setupUi
+
+	void retranslateUi(QWidget *shotDig)
+	{
+		shotDig->setWindowTitle(QApplication::translate("shotDig", "shotDig", 0));
+		imgLbl->setText(QString());
+		//	saveBtn->setText(QApplication::translate("shotDig", "save", 0));
+		editBtn->setText(QApplication::translate("shotDig", "edit", 0));
+		canBtn->setText(QApplication::translate("shotDig", "cancel", 0));
+	} // retranslateUi
 
 };
 
 namespace Ui {
-    class shotDig: public Ui_shotDig {};
+	class shotDig : public Ui_shotDig {};
 } // namespace Ui
 
 QT_END_NAMESPACE
