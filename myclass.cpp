@@ -45,8 +45,7 @@ void MyClass::newDig() {
 
 		Size *s = new Size((int)frame.cols, (int)frame.rows);
 		
-		outputVideo.open("C://Users//HAN//Documents//Its-Me//photo//video.avi", -1,
-			15, *s, true);
+		outputVideo.open("video.avi", -1,15, *s, true);
 
 		if (!outputVideo.isOpened())
 		{

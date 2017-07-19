@@ -1,33 +1,20 @@
 ﻿#include "editdig.hpp"
+#include <qgraphicsview.h>
 
 editDig::editDig(QWidget * parent) : QWidget(parent) {
 	ui.setupUi(this);
+	ui.tableWidget = new QTableWidget(this);
 	dw = new QDesktopWidget();
-	//imglbl = new QLabel(this);
-	table = new QTableWidget(this);
+	width = dw->geometry().width() / 2;
+	height = dw->geometry().height() / 2;
 
-	table->setGeometry(0, 0, dw->geometry().width(), dw->geometry().height());
-	QTableWidgetItem *thumbnail = new QTableWidgetItem();
-	//	thumbnail->setData(Qt::DecorationRole, QPixmap("btn.PNG"));
-	table->setShowGrid(true);
-	table->verticalHeader()->hide();
-	table->horizontalHeader()->hide();
-
-	//	table->setRowCount(3);
-		//table->setColumnCount(3);
-		//table->setItem(0, 0, thumbnail);
-
-		/*
-		img.load("Blue.jpg");
-		QPixmap *buf = new QPixmap();
-		*buf = QPixmap::fromImage(img);
-
-		imglbl->setPixmap(*buf);
-		imglbl->setGeometry(0, 0, dw->geometry().width() / 3, dw->geometry().height() / 3);
-		*/
+	ui.tableWidget->setShowGrid(false);
+	ui.tableWidget->verticalHeader()->hide();
+	ui.tableWidget->horizontalHeader()->hide();
+	ui.tableWidget->setSizeAdjustPolicy(QTableWidget::AdjustToContents);
 
 	addImgItem();
-	this->resize(dw->geometry().width() / 2, dw->geometry().height() / 2);
+	this->resize(width, height);
 	this->show();
 
 }
@@ -38,6 +25,8 @@ editDig::~editDig() {
 void editDig::addImgItem() {
 	int col = 0, row = 0, tem = 0;
 	QDir dir = QDir("imgData");
+	QTableWidgetItem *thumbnail;
+	QString str2[10][5];
 	QFileInfoList list = dir.entryInfoList();
 
 	for (int i = 0; i < list.size(); ++i) {
@@ -47,28 +36,51 @@ void editDig::addImgItem() {
 		if ((str.compare(".") == 0) || (str.compare("..") == 0))
 			continue;
 		if (fileInfo.isDir()) {
-			row++;
 			QFileInfoList list2 = QDir(fileInfo.filePath()).entryInfoList();
 			tem = 0;
 			for (int j = 0; j < list2.size(); j++) {
 				QFileInfo info2 = list2.at(j);
 				if (info2.isFile())
 				{
-					std::string str2 = info2.fileName().toStdString();
+					str2[row][tem] = info2.filePath();
 					tem++;
 				}
 			}
+			row++;
 			if (col < tem)
 				col = tem;
 		}
 
 	}
-	table->setRowCount(row);
-	table->setColumnCount(col);
-	for(int u=1;u<row+1;u++)
-	table->setRowHeight(row+1, dw->geometry().height()/(row+1));
-	for (int u = 1; u<row + 1; u++)
-	table->setColumnWidth(col+1, dw->geometry().width()/(col+1));
+	ui.tableWidget->setRowCount(row);
+	ui.tableWidget->setColumnCount(col);
+
+	for (int u = 0; u < row; u++)
+		for (int t = 0; t < col; t++)
+		{
+			thumbnail = new QTableWidgetItem();
+			thumbnail->setData(Qt::DecorationRole, QPixmap(str2[u][t]));
+			ui.tableWidget->setItem(u, t, thumbnail);
+
+		}
+
+
+	for (int u = 0; u < row; u++)
+		ui.tableWidget->setRowHeight(u, (height / row));
+
+	for (int u = 0; u < row; u++)
+		ui.tableWidget->setColumnWidth(u, (width / col));
+
+}
+
+void editDig::enterItem(QTableWidgetItem * item) {
+	QGraphicsScene  *sc =new  QGraphicsScene( );
+	QGraphicsView * grp=new QGraphicsView();
+	grp->setScene(sc);
+	QPixmap im=item->data(Qt::DecorationRole).value<QPixmap>();
+	sc->addPixmap(im);
+	grp->show();
+
 
 
 }

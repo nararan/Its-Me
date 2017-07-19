@@ -1,10 +1,8 @@
-<UI version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>editDig</class>
- <widget class="QWidget" name="editDig" >
-  <property name="objectName" >
-   <string notr="true">editDig</string>
-  </property>
-  <property name="geometry" >
+ <widget class="QWidget" name="editDig">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -12,12 +10,41 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>editDig</string>
   </property>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>30</y>
+     <width>256</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
-</UI>
+ <connections>
+  <connection>
+   <sender>tableWidget</sender>
+   <signal>itemClicked(QTableWidgetItem*)</signal>
+   <receiver>editDig</receiver>
+   <slot>enterItem(QTableWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>202</x>
+     <y>206</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>252</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>enterItem(QTableWidgetItem*)</slot>
+ </slots>
+</ui>

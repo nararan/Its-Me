@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,14 +22,19 @@ QT_BEGIN_NAMESPACE
 class Ui_editDig
 {
 public:
+    QTableWidget *tableWidget;
 
     void setupUi(QWidget *editDig)
     {
         if (editDig->objectName().isEmpty())
             editDig->setObjectName(QStringLiteral("editDig"));
         editDig->resize(400, 300);
+        tableWidget = new QTableWidget(editDig);
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
+        tableWidget->setGeometry(QRect(70, 30, 256, 192));
 
         retranslateUi(editDig);
+        QObject::connect(tableWidget, SIGNAL(itemClicked(QTableWidgetItem*)), editDig, SLOT(enterItem(QTableWidgetItem*)));
 
         QMetaObject::connectSlotsByName(editDig);
     } // setupUi

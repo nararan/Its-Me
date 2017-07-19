@@ -14,11 +14,12 @@ public:
 	QDesktopWidget *dw;
 	QImage img;
 	QLabel * imglbl;
-	QTableWidget  * table;
-	
+	int width, height;
 
 	void addImgItem();
 
+	public slots:
+	void enterItem(QTableWidgetItem*);
 private:
 	Ui::editDig ui;
 };
