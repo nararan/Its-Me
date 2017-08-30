@@ -30,6 +30,7 @@ face_change::face_change(std::vector<char *> filename)
 
 	cout << "\n\nProgram Started\n\n";
 	for (int i = 0; i < filename.size(); i++) {
+		cout << "count " << i << "\n";
 		int noOfFaces = 0;
 		faceNumber = 0;
 		std::vector<sample_type> samples;
@@ -66,7 +67,7 @@ int face_change::detectFaceAndCrop(char *imageName)
 
 	load_image(img, imageName);
 
-	pyramid_up(img);
+	pyramid_up(img); // 이미지확대
 
 	std::vector<dlib::rectangle> faceRectangles = detector(img);
 
@@ -117,9 +118,10 @@ std::vector<sample_type> face_change::getAllAttributes(int noOfFaces)
 
 
 		std::vector<dlib::rectangle> faceRectangles = detector(img);
-
+		if (faceRectangles.size() == 0)
+			continue;
 		std::vector<full_object_detection> facialFeatures;
-
+		// 여기서 얼굴 사각형을 못잡으면 나가도록 구현
 		full_object_detection feature = sp(img, faceRectangles[0]);
 		int l = 0;
 		for (int j = 0; j < 68; j++)
@@ -207,6 +209,8 @@ std::vector<double> face_change::probablityCalculator(std::vector<double> P)
 
 int face_change::find_Num(std::vector<double> happySize)
 {
+	if (happySize.size() == 0) // 못찾을 경우
+		return -1;
 	double maxX = *max_element(happySize.begin(), happySize.end());
 	for (int i = 0; i < happySize.size(); i++)
 	{

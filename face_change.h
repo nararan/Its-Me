@@ -31,8 +31,9 @@ typedef normalized_function<probabilistic_funct_type> pfunct_type;
 
 
 class face_change {
-	int faceN;
 public:
+	int faceN;
+
 	face_change::face_change();
 	face_change::face_change(std::vector<char *> filename);
 	int detectFaceAndCrop(char *imageName);
